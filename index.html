@@ -6,9 +6,102 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/lighter.css" rel="stylesheet">
-  </head>
-  <body>
+    
+    	<script src="js/jquery.js"></script>
+ 
+	<script src="js/jquery.mobile-1.4.5.min.js"></script>
 
+    <script> 
+    
+    var Info = 
+{
+	id: null,
+	result: null
+}
+
+
+$(function() 
+{
+ 			var url = 'https://spreadsheets.google.com/feeds/list/19wsJ9q7QDX3XZ7syPPhbpv2pJK2bgsbTSMPuMzAXqPk/od6/public/values?alt=json-in-script&callback=importGSS';
+
+			$.ajax({
+				url: url,
+				dataType: "jsonp",
+				async: true,
+				jsonpCallback: 'importGSS',
+				success: function(result) 
+				{
+				 // alert('hello');
+ 					 ajax.parseJSONP(result);
+				},
+				error: function(request, error) {
+					alert('Network error has occurred please try again!');
+				}
+			}); //$.ajax({
+
+
+
+			var ajax = {
+					parseJSONP: function(result) {
+
+						//    	console.log(result.feed.entry[0].email.$t);
+						Info.result = result.feed.entry;
+
+						$.each(result.feed.entry, function(id, row) {
+
+							// console.log(JSON.stringify(row['gsx$title']['$t'] ));
+						//	$('#TitleBox').append('<div data-filtertext="' + row['gsx$title']['$t'] + '"><a href="#" data-desc='+  JSON.stringify(row['gsx$description']['$t'] ) +' data-id=' + id + ' > <h3>' + row['gsx$title']['$t'] + '</h3> </a> </div>');
+					
+							$('#viewList').append('						<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color==blue?red:blue"></span> </div><h3>' + row['gsx$title']['$t'] + '</h3><p>'+  JSON.stringify(row['gsx$description']['$t'] ) +' </p> </div> <!-- /.benefit -->');
+					
+					
+					
+					
+		//			<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#momtexts</h3><p>@jimmyfallon I once got a text from my mom where "You're amazing" autocorrected to "You're adopted" #momtexts</p> </div> <!-- /.benefit -->
+							//console.log(JSON.stringify(row));
+	 					});//	$.each(result.feed.entry, function(id, row) {
+
+					//	$('#viewList').listview('refresh');
+						
+						
+					}}//	var ajax = {
+					
+	 
+
+      
+					$(document).on('vclick', '#TitleBox li a', function(){  
+					     Info.id = $(this).attr('data-id');
+					    $.mobile.changePage( "#DescriptionPage", { transition: "slide", changeHash: false });
+					    
+					    
+					    
+					     $('#detailBox').empty();
+					    $('#detailBox').append('<li ><h3>' + $(this).attr('data-desc') + '</h3>  </li>');
+
+					      $('#detailBox').listview('refresh');
+					    
+					    
+					}); //		$(document).on('vclick', '#TitleBox li a', function(){  
+
+					
+					
+}	);//$(function() {
+ 
+ </script>
+
+
+</head>
+<body>
+ <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=749611728421122&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+ 
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -42,50 +135,8 @@
 
     <div class="container">
       <h3 id="features" class="subhead">Look for updates every week!!!</h3>
-      <div class="row benefits">
-      <div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#momtexts</h3><p>@jimmyfallon I once got a text from my mom where "You're amazing" autocorrected to "You're adopted" #momtexts</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#momtexts</h3><p>@jimmyfallon My mom once texted me "can you come over, I want you to take a selfie of me" #momtexts</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#momtexts</h3><p>On Valentine's Day last year, my mom texted me, "Enjoy your VD." Not the best time to abbreviate, mom. #momtexts</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#worstgiftever</h3><p>One year, I got the book "He's Just Not That Into You" from FIVE different people. Message received. #worstgiftever Sorry, @gregorybehrendt</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#worstgiftever</h3><p>@jimmyfallon a $25 Starbucks Gift card... The balance was only $10 #worstgiftever</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#worstgiftever</h3><p>My dad once got me a shirt that was his size and said he would take it if I didn't want it. #worstgiftever</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#worstgiftever</h3><p>Friend:can I order off the kids menu? Waiter: if you call me daddy.. #myweirdwaiter</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#worstgiftever</h3><p>#Myweirdwaiter Was dining alone and the waiter sang â€˜All By Myselfâ€™ every time he went past my table. As if I wasnâ€™t feeling lonely enough.</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#worstgiftever</h3><p>Direct quote: "Can you tip me in cash, bro? I think I'm getting fired in about 20 minutes." #myweirdwaiter</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#misheardlyrics</h3><p>@jimmyfallon My then 5th grader used to sing "gimme the beef boys to free my soul" Eventually I had to stop her w/o details. #misheardlyrics</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#misheardlyrics</h3><p>The chant in Michael Jackson's "Wanna be Starting Something" as "I'm ashamed of the side of my moccasins." #misheardlyrics</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#misheardlyrics</h3><p>@jimmyfallon "Do a little dance, make a little love, Italian Ice, Italian Ice." #misheardlyrics</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#SaladIsNotThatFun</h3><p>The ability to eat salad and be as happy as every person I've ever seen eating a salad in a commercial #mysuperpower #SaladIsNotThatFun</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#SaladIsNotThatFun</h3><p>I would have the power to shrink my hands to be able to eat pringles.#mysuperpower</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#SaladIsNotThatFun</h3><p>The power to stop letting anyone over the age of 30 let it think it is ok to twerk in public places #mysuperpower</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#SaladIsNotThatFun</h3><p>My uncle always wraps birthday gifts in the obituaries to remind us of how lucky we are to celebrate another year. #myweirdrelative</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#myweirdrelative</h3><p>@jimmyfallon uncle got banned from Chinese buffet 4staying 4 hours and then trying 2 take home 50 crab legs in his pocket. #myweirdrelative</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#MyWeirdRelative</h3><p>@JimmyFallon My Aunt wears her bangs taped to her forehead so they don't move and look even. #MyWeirdRelative</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#MyWeirdRelative</h3><p>I can explain in great detail why season 3 of Dawson's Creek is the best season. #WhyImSingle</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#whyimsingle</h3><p>@jimmyfallon the only thing I have in my fridge is a rotisserie chicken and a box of wine #whyimsingle</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#whyimsingle</h3><p>I don't know how to respond to compliments. A guy once told me my hair looked nice & I responded, "thanks, I grew it" #whyimsingle</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#worstcarieverhad</h3><p>@jimmyfallon 82 Nissan Sentra with tape stuck in cassette player. I listened to "Breakfast at Tiffany's" 12,321 times. #worstcarieverhad</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#worstcarieverhad</h3><p>1979 Chevette no trunk lock, white & rust trim, two front spares, I think it got stolen once but it was left 1 block away #worstcarieverhad</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#worstcarieverhad</h3><p>@jimmyfallon during my driver's test, the instructor tried to roll down his window and the glass fell out. #worstcarieverhad</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#myweirdgymstory</h3><p>@jimmyfallon I pulled an ab muscle laughing at the 6 ppl who face planted on treadmills when power went out. #myweirdgymstory</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#myweirdgymstory</h3><p>@jimmyfallon Fake ponytail fell off playing pick-up bball against all guys. I scored 2 win the game, but they laughed!#myweirdgymstory</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#myweirdgymstory</h3><p>@jimmyfallon back in college we saw a guy looking in the mirror screaming 'these aren't shoulders, these are boulders!' #myweirdgymstory</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#iusedtothink</h3><p>@jimmyfallon I used to think a blender was actually called a margarita, because that's all my parents ever used it for. #iusedtothink</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#iusedtothink</h3><p>#iusedtothink the asterisk on the phone dialing pad was a snowflake my parents used to "call Santa" to tell him when I was being naughty.</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#iusedtothink</h3><p>#IUsedToThink that Ellen DeGeneres was called Ellen THE Generous because she was so generous.</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#iusedtothink</h3><p>Pop rock cat litter #whydonttheymakethat</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#iusedtothink</h3><p>A mirror that slaps you when you are dressed like an idiot #whydonttheymakethat</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#iusedtothink</h3><p>A "nobody cares" button on Facebook. #WhyDontTheyMakeThat ??</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#iusedtothink</h3><p>I used mom's mascara on my 10yr old peach fuzzed upper lip to make it look like I had a real moustach. #ithoughtiwascool</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#iusedtothink</h3><p>Everyone had their hats on backward so I tried to start the trend of wearing your backpack on your belly. Didn't catch on. #ithoughtiwascool</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#iusedtothink</h3><p>#ithoughtiwascool when I was in 5th grade, i put on sunglasses and referred to myself in the third person as shades</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#howigotdumped</h3><p>@jimmyfallon we were on a chairlift heading up the slope. She dumped me. Then the lift broke. Awkward half hour of silence. #howigotdumped</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#howigotdumped</h3><p>@jimmyfallon i told a guy "i don't think things are working out" as an april fool's joke...he agreed. #howigotdumped</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#howigotdumped</h3><p>Got a card w/ a Netflix subscription & Baskin Robbins gift card. Card read: Want you to be ok, just don't want you anymore. #howigotdumped</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#howigotdumped</h3><p>Almost drowned while fixing a hole in the pool, by wearing a backpack full of rocks & trying to breathe through a garden hose. #ThatsMyDad</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#thatsmydad</h3><p>@jimmyfallon My dad works on his laptop in a recliner while watching sports and claps with his feet when something good happens. #thatsmydad</p> </div> <!-- /.benefit -->
-<div class="col-md-4 col-sm-6 benefit"><div class="benefit-ball"><span class="glyphicon glyphicon-send" onClick="javascript:this.style.color=this.style.color=='blue'?'red':'blue'"></span> </div><h3>#thatsmydad</h3><p>.@jimmyfallon My dad calls his email address his "web site." #thatsmydad</p> </div> <!-- /.benefit -->
-      </div> <!-- /.row -->
+      <div id="viewList" class="row benefits">
+        </div> <!-- /.row -->
     </div> <!-- /.container -->
  
     <footer>
