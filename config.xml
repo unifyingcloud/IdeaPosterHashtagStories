@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <widget xmlns   = "http://www.w3.org/ns/widgets"
-        xmlns:gap   = "http://phonegap.com/ns/1.0"
-        id          = "com.unifyingcloud.ideaposter.hashtagstories"
-        versionCode = "30" 
-        version     = "3.0.0" >
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.unifyingcloud.ideaposter.hashtagstories" versionCode="30" version="3.0.0">
 
     <!-- versionCode is optional and Android only -->
 
     <name>Hashtag Stories</name>
 
     <description>
-        Hashtag stories 
+        Hashtag stories
     </description>
 
     <author href="https://www.unifyingcloud.com" email="jonatane.cisneros@gmail.com">
-       Unifying Cloud
+        Unifying Cloud
     </author>
 
     <!--
@@ -22,4 +18,5 @@
       following tag to your config.xml; you will still have the INTERNET
       permission on your app, which PhoneGap requires.
     -->
-    <preference name="permissions" value="none"/>
+    <preference name="permissions" value="none" />
+</widget>
